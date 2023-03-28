@@ -1,7 +1,7 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod"
-import { FormControl, Input } from "@chakra-ui/react";
+import { FormControl, FormLabel, HStack, Input, Text, VStack } from "@chakra-ui/react";
 
 
 const validationSchema = z.object({
@@ -30,25 +30,28 @@ export default function Form() {
   console.log(watch("firstName")) // watch input value by passing the name of it
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="firstName">First Name</label>
-      <Input defaultValue="" {...register("firstName")} />
-      {errors.firstName && <span>This field is required</span>}
+    <VStack width={"40%"} >
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <FormLabel htmlFor="firstName">First Name</FormLabel>
+        <Input defaultValue="" {...register("firstName")} />
+        {errors.firstName ? <Text color="red">This field is required</Text> : null}
 
-      <label htmlFor="lastName">Last Name</label>
-      <Input defaultValue="" {...register("lastName")} />
-      {errors.lastName && <span>This field is required</span>}
+        <FormLabel htmlFor="lastName">Last Name</FormLabel>
+        <Input defaultValue="" {...register("lastName")} />
+        {errors.lastName ? <Text color="red" >This field is required</Text> : null}
 
-      <label htmlFor="password">Password</label>
-      <Input {...register("password", { required: true })} />
-      {errors.password && <span>This field is required</span>}
+        <FormLabel htmlFor="password">Password</FormLabel>
+        <Input {...register("password", { required: true })} />
+        {errors.password ? <Text color="red">This field is required</Text> : null}
 
 
-      <label htmlFor="email">Email</label>
-      <Input {...register("email", { required: true })} />
-      {/* errors will return when field validation fails  */}
-      {errors.email?.message}
-      <Input type="submit" />
-    </form>
+        <FormLabel htmlFor="email">Email</FormLabel>
+        <Input {...register("email", { required: true })} />
+        {errors.password ? <Text color="red" >{errors.email?.message}</Text> : null}
+
+        <Input backgroundColor="black" color="white" marginTop={8} cursor="pointer" type="submit" />
+      </form>
+    </VStack>
+
   )
 }
