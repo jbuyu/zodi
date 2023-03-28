@@ -12,8 +12,8 @@ import { TypeOf, z } from "zod";
 
 const Post = z.object({
   userId: z.number(),
-  id: z.number(),
-  title: z.string(),
+  // id: z.number(),
+  title: z.string().max(100),
   body: z.string(),
   // name: z.string(),
 })
@@ -21,7 +21,7 @@ const Post = z.object({
 type Post = z.infer<typeof Post>
 
 
-export const useGetPosts = () => {
+export const useGetPost = () => {
   //runtime parsing
   return useQuery({
     queryKey: ['Users'], queryFn: async (): Promise<Post> => {
