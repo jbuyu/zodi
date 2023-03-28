@@ -15,7 +15,7 @@ export default function Users() {
   return (
     <VStack>
       {
-        <Box>{fetchedPost.data?.title}</Box>
+        <Box>{fetchedPost.data?.userId}</Box>
       }
     </VStack>
   )
