@@ -1,11 +1,20 @@
-import { useQuery } from "@chakra-ui/react";
+import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
-const getUsers = async () => {
-  const response = await axios.get("https://jsonplaceholder.typicode.com/users")
-  return response;
+type Users = {
+  userId: string
+  id: string,
+  title: string,
+  body: string
+  name: string
 }
 
+
 export const useGetUsers = () => {
-  return useQuery('users', getUsers)
+  return useQuery({
+    queryKey: ['todos'], queryFn: async (): Promise<Users[]> => {
+      const response = await axios.get("https://jsonplaceholder.typicode.com/posts")
+      return response.data;
+    }
+  })
 }

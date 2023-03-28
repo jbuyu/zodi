@@ -1,7 +1,18 @@
-import { Text } from '@chakra-ui/react'
+import { Box, Text, VStack } from '@chakra-ui/react'
+import { useGetUsers } from '../hooks'
 
 export default function Users() {
+  const { data, isLoading, isError } = useGetUsers();
+  if (isLoading) {
+    <Text>Loading</Text>
+  }
   return (
-    <Text>Fetching from External Libraries</Text>
+    <VStack>
+      {
+        data?.map((user) => (
+          <Box>{user?.name}</Box>
+        ))
+      }
+    </VStack>
   )
 }
