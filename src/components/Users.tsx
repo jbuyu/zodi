@@ -1,17 +1,16 @@
 import { Box, Text, VStack } from '@chakra-ui/react'
-import { useGetUsers } from '../hooks'
+import { useGetPosts } from '../hooks'
 
 export default function Users() {
-  const { data, isLoading, isError } = useGetUsers();
+  const { data, isLoading, isError } = useGetPosts();
+  console.log('data', data)
   if (isLoading) {
     <Text>Loading</Text>
   }
   return (
     <VStack>
       {
-        data?.map((user) => (
-          <Box>{user?.name}</Box>
-        ))
+        <Box>{data?.body}</Box>
       }
     </VStack>
   )
