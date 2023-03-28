@@ -1,7 +1,8 @@
 import { Heading, VStack } from '@chakra-ui/react'
 import './App.css'
-import Posts from './components/Posts'
-import Users from './components/Users'
+import Posts from './components/Users'
+import Users from './components/Posts'
+import Form from './components/Form'
 
 function App() {
 
@@ -9,7 +10,8 @@ function App() {
     <VStack spacing={8} className="App">
       <Heading>Zod</Heading>
       <Users />
-      {/* <Posts /> */}
+      <Posts />
+      <Form />
     </VStack>
   )
 }

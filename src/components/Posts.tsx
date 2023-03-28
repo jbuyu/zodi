@@ -1,13 +1,22 @@
-import React from 'react'
-import { useGetPosts } from '../hooks'
+import { Box, Text, VStack } from '@chakra-ui/react'
+import { useGetPost } from '../hooks'
 
 export default function Posts() {
+  const fetchedPost = useGetPost();
+  console.log('data', fetchedPost)
 
-  const fetchedPosts = useGetPosts()
+  if (fetchedPost.isError) {
+    // <Text>{fetchedPost.error.issues[0].name}</Text>
+  }
 
-  console.log('first', fetchedPosts)
-
+  if (fetchedPost.isLoading) {
+    <Text>Loading</Text>
+  }
   return (
-    <div>Posts</div>
+    <VStack>
+      {
+        <Box>{fetchedPost.data?.userId}</Box>
+      }
+    </VStack>
   )
 }

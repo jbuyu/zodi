@@ -13,7 +13,7 @@ import { TypeOf, z } from "zod";
 
 //post
 const Post = z.object({
-  userId: z.number(), //corceion
+  userId: z.number().transform(val => `${val} mil`), //also corce
   // id: z.number(),
   title: z.string().max(100),
   body: z.string(),
@@ -23,7 +23,7 @@ const Post = z.object({
 type Post = z.infer<typeof Post>
 
 
-//post
+//user
 const User = z.object({
   id: z.number(),
   name: z.string().min(2),
@@ -49,13 +49,13 @@ export const useGetPost = () => {
 
 
 
-export const useGetPosts = () => {
+export const useGetUsers = () => {
   //runtime parsing
   return useQuery({
-    queryKey: ['Users'], queryFn: async () => {
+    queryKey: ['Users'], queryFn: async (): Promise<User[]> => {
       const response = await axios.get("https://jsonplaceholder.typicode.com/users");
-      const parsedPost = Post.parse(response?.data)
-      return response.data;
+      const parsedUsers = z.array(User).parse(response.data)
+      return parsedUsers
     }
   })
 }

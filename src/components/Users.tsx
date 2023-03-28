@@ -1,22 +1,26 @@
-import { Box, Text, VStack } from '@chakra-ui/react'
-import { useGetPost } from '../hooks'
+import { Box, Text } from '@chakra-ui/react'
+import React from 'react'
+import { useGetUsers } from '../hooks'
 
 export default function Users() {
-  const fetchedPost = useGetPost();
-  console.log('data', fetchedPost)
 
-  if (fetchedPost.isError) {
-    // <Text>{fetchedPost.error.issues[0].name}</Text>
+  const fetchedUsers = useGetUsers()
+
+  console.log('first', fetchedUsers)
+
+  if (fetchedUsers.isLoading) {
+    return (
+      <Text>Loading</Text>
+    )
   }
 
-  if (fetchedPost.isLoading) {
-    <Text>Loading</Text>
-  }
   return (
-    <VStack>
+    <div>
       {
-        <Box>{fetchedPost.data?.userId}</Box>
+        fetchedUsers?.data?.map(user => (
+          <Box key={user.id}>{user.name}</Box>
+        ))
       }
-    </VStack>
+    </div>
   )
 }
