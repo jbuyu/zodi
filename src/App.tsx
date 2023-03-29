@@ -9,9 +9,9 @@ function App() {
   return (
     <VStack spacing={8} className="App">
       <Heading>Zod</Heading>
-      {/* <Users />
-      <Posts /> */}
-      <Form />
+      {/* <Users /> */}
+      <Posts />
+      {/* <Form /> */}
     </VStack>
   )
 }
