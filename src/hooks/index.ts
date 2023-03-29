@@ -4,17 +4,18 @@ import { TypeOf, z } from "zod";
 
 // type Post = {
 //   userId: string
-// id: string,
+//   id: string,
 //   title: string,
 //   body: string
-//   // name: string
+//   name: string
 // }
 
 
-//post
+//zod post
 const Post = z.object({
-  userId: z.number().transform(val => `${val} mil`), //also corce
+  // userId: z.number().transform(val => `${val} mil`), //also corce
   // id: z.number(),
+  userId: z.coerce.number(),
   title: z.string().max(100),
   body: z.string(),
   // name: z.string(),
@@ -37,7 +38,6 @@ type User = z.infer<typeof User>
 
 
 export const useGetPost = () => {
-  //runtime parsing
   return useQuery({
     queryKey: ['Posts'], queryFn: async (): Promise<Post> => {
       const response = await axios.get("https://jsonplaceholder.typicode.com/posts/1");
@@ -47,10 +47,19 @@ export const useGetPost = () => {
   })
 }
 
+//typescript
+// export const useGetPost = () => {
+//   return useQuery({
+//     queryKey: ['Posts'], queryFn: async (): Promise<Post> => {
+//       const response = await axios.get("https://jsonplaceholder.typicode.com/posts/1");
+//       return response.data as Post;
+//     }
+//   })
+// }
+
 
 
 export const useGetUsers = () => {
-  //runtime parsing
   return useQuery({
     queryKey: ['Users'], queryFn: async (): Promise<User[]> => {
       const response = await axios.get("https://jsonplaceholder.typicode.com/users");

@@ -3,7 +3,7 @@ import { useGetPost } from '../hooks'
 
 export default function Posts() {
   const fetchedPost = useGetPost();
-  console.log('data', fetchedPost)
+  console.log('type', typeof (fetchedPost.data?.userId))
 
   if (fetchedPost.isError) {
     // <Text>{fetchedPost.error.issues[0].name}</Text>
@@ -15,7 +15,7 @@ export default function Posts() {
   return (
     <VStack>
       {
-        <Box>{fetchedPost.data?.userId}</Box>
+        <Box>{fetchedPost.data?.body}</Box>
       }
     </VStack>
   )
