@@ -1,7 +1,7 @@
 import { Box, Text, VStack } from '@chakra-ui/react'
 import { useGetPost } from '../hooks'
 
-export default function Posts() {
+export default function Post() {
   const fetchedPost = useGetPost();
   console.log('type', typeof (fetchedPost.data?.userId))
 
@@ -15,7 +15,7 @@ export default function Posts() {
   return (
     <VStack>
       {
-        <Box>{fetchedPost.data?.body}</Box>
+        <Box>{fetchedPost.data?.title}</Box>
       }
     </VStack>
   )

@@ -9,7 +9,7 @@ const validationSchema = z.object({
   lastName: z.string().min(1, { message: "Last name is required" }),
   password: z.string().min(1, { message: "Password  is required" })
     .refine((value) => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/
-      .test(value), 'Name should contain at least 8 characters'),
+      .test(value), 'Name should contain at least 8 characppacters'),
   email: z.string().min(1, { message: "email  is required" }).email({
     message: "Must be a valid email",
   }),
@@ -33,7 +33,8 @@ type InferedValidationSchema = z.infer<typeof validationSchema>
 
 
 export default function Form() {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm<InferedValidationSchema>({ resolver: zodResolver(validationSchema) });
+  const { register, handleSubmit, watch, formState: { errors } } =
+    useForm<InferedValidationSchema>({ resolver: zodResolver(validationSchema) });
   const onSubmit: SubmitHandler<InferedValidationSchema> = data => console.log(data);
 
   console.log('errors', errors)

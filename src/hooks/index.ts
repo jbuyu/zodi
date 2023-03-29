@@ -13,8 +13,8 @@ import { TypeOf, z } from "zod";
 
 //zod post
 const Post = z.object({
-  // userId: z.number().transform(val => `${val} mil`), //also corce
-  // id: z.number(),
+  // userId: z.number().transform(val => `${val} mil`), //
+  id: z.number(),
   userId: z.coerce.number(),
   title: z.string().max(100),
   body: z.string(),
@@ -27,7 +27,7 @@ type Post = z.infer<typeof Post>
 //user
 const User = z.object({
   id: z.number(),
-  name: z.string().min(2),
+  // name: z.string().min(2),
   username: z.string(),
   email: z.string().email(),
 })

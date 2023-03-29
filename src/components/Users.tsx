@@ -18,7 +18,7 @@ export default function Users() {
     <div>
       {
         fetchedUsers?.data?.map(user => (
-          <Box key={user.id}>{user.name}</Box>
+          <Box key={user.id}>{user.email}</Box>
         ))
       }
     </div>
